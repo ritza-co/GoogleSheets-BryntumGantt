@@ -3,6 +3,8 @@ const app = express();
 const csv = require('csvtojson');
 const request = require('request');
 const cors = require('cors');
+// Load environment variables
+require('dotenv').config();
 
 app.use(
   cors({
@@ -11,9 +13,11 @@ app.use(
   })
 );
 
+// get SHEET_ID from .env file
+const SHEET_ID = process.env.SHEET_ID;
+
 app.get('/download', (req, res) => {
-  const url =
-    'https://docs.google.com/spreadsheets/d/1bPxTFa3a91D7ufVMFFi0LLVVAvSEXKPywshF-kMiweU/export?format=csv&id=1bPxTFa3a91D7ufVMFFi0LLVVAvSEXKPywshF-kMiweU&gid=0';
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&id=${SHEET_ID}&gid=0`;
 
   request(url, (error, response, body) => {
     if (!error && response.statusCode === 200) {
