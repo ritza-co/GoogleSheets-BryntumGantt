@@ -3,7 +3,7 @@ const app = express();
 const csv = require('csvtojson');
 const request = require('request');
 const cors = require('cors');
-// Load environment variables
+
 require('dotenv').config();
 
 app.use(
@@ -13,7 +13,6 @@ app.use(
   })
 );
 
-// get SHEET_ID from .env file
 const SHEET_ID = process.env.SHEET_ID;
 
 app.get('/download', (req, res) => {
